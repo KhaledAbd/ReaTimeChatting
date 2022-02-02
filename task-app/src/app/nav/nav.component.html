@@ -1,0 +1,33 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-primary">
+  <div class="container">
+    <a class="navbar-brand" [routerLink]="['/']">Chatting App</a>
+
+
+    <ul *ngIf="loggedIn()" class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/list-users']" routerLinkActive="active" >masseges</a></li>
+      <li class="nav-item">
+      </li>
+    </ul>
+    <div *ngIf="loggedIn()"   class="d-inline-block">
+      <div>
+        <span>
+          <img src="{{ photoUrl}}" alt="" >
+        </span>
+        Welcome {{ user.username | titlecase}}
+      </div>
+    </div>
+    <div>
+      <a class="dropdown-item" *ngIf="loggedIn()" (click) = "logout()"><i class="fa fa-sign-out"></i>Logout</a>
+    </div>
+    <form *ngIf="!loggedIn()" #loginForm="ngForm" class="form-inline mt-2 mt-md-0" (ngSubmit)="login()">
+      <input class="form-control mr-sm-2" type="text" placeholder="username" name="username" aria-label="username"
+        required [(ngModel)]="model.username" #username="ngModel" />
+      <input class="form-control mr-sm-2" type="password" placeholder="password" name="password" aria-label="password"
+        required [(ngModel)]="model.password" #password="ngModel" />
+      <button [disabled]="!loginForm.valid" class="btn btn-success my-2 my-sm-0" type="submit">
+        Login
+      </button>
+    </form>
+  </div>
+</nav>
